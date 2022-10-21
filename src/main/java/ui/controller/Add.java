@@ -21,15 +21,17 @@ public class Add extends RequestHandler {
             try {
                 service.addAnimal(animal);
                 HttpSession session = request.getSession();
-                // geef meer ingewikkelde informatie door met sendRedirect via session attribute
-                // indien nodig: verwijder attribuut
+                // geef bij sendRedirect informatie door via session attribute
+                // indien nodig: verwijder attribuut als het gebruikt is
+                // kan ook via parameter in querystring bijv "Controller?command=Overview&laatstToegevoegdId=23"
                 // in dit voorbeeld: we willen op overzichtspagina altijd laatst toegevoegde dier tonen
                 // moet via session omdat request attribuut verloren gaat bij sendredirect
                 session.setAttribute("lastAddedAnimal", animal);
                 // creëer 300-status met sendRedirect
                 response.sendRedirect("Controller?command=Overview");
                 // return value mag niet null zijn, want anders nullpointerException in Controller
-                return "Controller?command=Home";
+                // maar de waarde van de string die je returnt is hier onbelangrijk
+                return "Controller?command=Overview";
             }
             catch (IllegalArgumentException exc) {
                 request.setAttribute("error", exc.getMessage());

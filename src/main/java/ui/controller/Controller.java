@@ -45,8 +45,8 @@ public class Controller extends HttpServlet {
         // server kan maar één http response sturen
         // als er al een sendRedirect geweest is, mag er geen forward meer zijn
         if (!response.isCommitted()) {
-            RequestDispatcher view = request.getRequestDispatcher(destination);
-            view.forward(request, response);
+                RequestDispatcher view = request.getRequestDispatcher(destination);
+                view.forward(request, response);
         }
 
     }
